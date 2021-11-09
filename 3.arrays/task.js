@@ -7,7 +7,7 @@ console.log (compereArrays([1, 2, 3], [1, 2, 3]));
 
 
 function advancedFilter(arr) {
-  let resultArr = arr.filter(elem => elem > 0).filter(elem => elem % 3).map(elem => elem * 10);
+  let resultArr = arr.filter(elem => elem > 0)filter(elem => {return !(elem % 3)}).map(elem => elem * 10);
   return resultArr; // array
 }
 
