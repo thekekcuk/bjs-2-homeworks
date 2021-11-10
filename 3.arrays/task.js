@@ -1,9 +1,14 @@
 'use strict'
 function compereArrays(arr1, arr2) {
-  let result = arr1.every((item, idx) => {return (arr1[idx] == arr2[idx])});
+  let result;
+  if (arr1.length == arr2.length) {
+    result = arr1.every((item, idx) => arr1[idx] == arr2[idx]);
+  } else {
+    result = false;
+  }
   return result;
 }
-console.log (compereArrays([11, 22, 33], [11, 22, 33]));
+console.log (compereArrays([11, 22, 33, 54], [11, 22, 33]));
 
 
 function advancedFilter(arr) {
