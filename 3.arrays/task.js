@@ -1,14 +1,21 @@
 'use strict'
-function compereArrays(arr1, arr2) {
+// function compareArrays(arr1, arr2) {
+//   let result;
+//   if (arr1.length == arr2.length) {
+//     result = arr1.every((item, idx) => arr1[idx] == arr2[idx]);
+//   } else {
+//     result = false;
+//   }
+//   return result;
+// }
+// console.log (compareArrays([11, 22, 33, 54], [11, 22, 33]));
+
+function compareArrays(arr1, arr2) {
   let result;
-  if (arr1.length == arr2.length) {
-    result = arr1.every((item, idx) => arr1[idx] == arr2[idx]);
-  } else {
-    result = false;
-  }
+  result = (arr1.every((item, idx) => arr1[idx] == arr2[idx])) && arr1.length == arr2.length;
   return result;
 }
-console.log (compereArrays([11, 22, 33, 54], [11, 22, 33]));
+console.log (compareArrays([11, 22, 33, 54], [11, 22, 33]));
 
 
 function advancedFilter(arr) {
