@@ -46,7 +46,13 @@ Student.prototype.addMarks = function (...mark) {
 
 Student.prototype.getAverage = function () {
     let newProperty = 'average';
-    this.average;
+    let sum = 0;
+    let aver = 0;
+    for (let i = 0; i < this.marks.length; i++) {
+        sum += this.marks[i];
+        aver = sum / this.marks.length;
+    }
+    this.average = aver.toFixed(2);
 }
 
 Student.prototype.exclude = function (reason) {
@@ -67,4 +73,5 @@ student22.setSubject('Физика');
 student22.exclude('Леньтяй');
 console.log(student22);
 student3.addMarks(4,4,5);
+student3.getAverage();
 console.log(student3);
