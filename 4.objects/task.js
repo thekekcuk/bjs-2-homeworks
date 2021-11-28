@@ -25,11 +25,11 @@ Student.prototype.addMark = function (mark) {
 }
 
 Student.prototype.addMarks = function (...mark) {
-    this.marks = mark;
+    //this.marks = mark;
     if (this.marks === undefined) {
-        this.marks = [mark];
+        this.marks = mark;
     } else {
-        this.marks.concat(mark);
+        this.marks = this.marks.concat(mark);
     }
 }
 
@@ -60,6 +60,9 @@ student22.setSubject('Физика');
 student22.getAverage();
 //student22.exclude('Леньтяй');
 student3.addMarks(4,4,5);
+student3.addMark(1);
+student3.addMark(2);
+student3.addMark(5);
 student3.getAverage();
 console.log(student3);
 console.log(student22);
