@@ -23,7 +23,14 @@ class AlarmClock {
     }
 
     removeClock(id) {
+        let beforeRemoveClock = this.alarmCollection.length;
         this.alarmCollection = this.alarmCollection.filter(item => item.id !== id);
+        let afterRemoveClock = this.alarmCollection.length;
+        if (beforeRemoveClock !== afterRemoveClock) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     getCurrentFormattedTime() {
@@ -39,11 +46,23 @@ class AlarmClock {
     }
 
     start() {
-
+        let checkClock = (alarm) => {
+            if (this.getCurrentFormattedTime() === alarm.time) {
+                return alarm.callback();
+            }
+        }
+        if (this.timerId === null) {
+            this.timerId = setInterval(() => {
+                this.alarmCollection.forEach(checkClock);
+              }, 10000);
+          }
     }
 
     stop() {
-
+        if (this.timerId) {
+            clearInterval(this.timerId);
+        }
+        this.timerId = null;
     }
 
     printAlarms() {
@@ -55,8 +74,12 @@ class AlarmClock {
 
     clearAlarms() {
         this.stop();
-        this.alarmCollection.splice(0, this.alarmCollection.length);
+        this.alarmCollection = [];
     }
 }
 
-let test = new AlarmClock();
+
+let phoneAlarm = new AlarmClock();
+phoneAlarm.addClock('00:14', () => console.log('Первый пошел'), 1);
+phoneAlarm.addClock('00:15', () => console.log('Второй пошел'), 2);
+phoneAlarm.addClock('00:16', () => console.log('Третий пошел'), 3);
