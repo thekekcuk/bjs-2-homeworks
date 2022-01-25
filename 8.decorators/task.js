@@ -33,10 +33,43 @@ const upgradedAddThree = cachingDecoratorNew(addThree);
 //upgradedAddThree(1, 2, 3);
 
 
-function debounceDecoratorNew(func) {
+const sendSignal = () => console.log("Сигнал отправлен");
+function debounceDecoratorNew(func, ms) {
   // Ваш код
+  let timeout;
+  return function () {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      func();
+    }, ms);
+  };
 }
 
-function debounceDecorator2(func) {
+//const upgradedSendSignal = debounceDecoratorNew(sendSignal, 2000);
+const upgradedSendSignal = debounceDecorator2(sendSignal, 2000);
+setTimeout(upgradedSendSignal); // Сигнал отправлен
+setTimeout(upgradedSendSignal, 300); // проигнорировано так как от последнего вызова прошло менее 2000мс
+setTimeout(upgradedSendSignal, 900); // проигнорировано аналогично
+setTimeout(upgradedSendSignal, 1200); // проигнорировано аналогично
+setTimeout(upgradedSendSignal, 2300); // проигнорировано аналогично
+setTimeout(upgradedSendSignal, 4400); // Сигнал отправлен
+setTimeout(upgradedSendSignal, 4500);
+
+
+function debounceDecorator2(func, ms) {
   // Ваш код
+  let timeout;
+  ;
+  function wrapper(count) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      func();
+    }, ms);
+    wrapper.history.push(count);
+  };
+  wrapper.history = [];
+  return wrapper;
 }
+
+
+//console.log(`запрос был выполнен ${upgradedSendSignal.history.length} раз`)
